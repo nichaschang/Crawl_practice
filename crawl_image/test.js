@@ -38,11 +38,14 @@ async function getData() {
     var picsDir = "./images/"+strKeyword +"/";
     if (!fs.existsSync(picsDir)) fs.mkdirSync(picsDir);
 
-      const uri = data[i].src;
-      console.log("uri =", data[i].src);
-      let imgName=i
-      if((i*1+1)<10){
-        imgName='0'+(i*1+1)
+      const url = data[i].src;
+      console.log("url =", data[i].src);
+      let imgName=i+1
+      if(i<10){
+        imgName='0'+(i+1)
+        if((i*1+1)==10){
+          imgName='10'
+        }
       }
       const filename =
         "images/" +
@@ -50,7 +53,7 @@ async function getData() {
         "/"+
         imgName +
         ".png";
-      await download_image(uri, filename);
+      await download_image(url, filename);
     }
 }
 
